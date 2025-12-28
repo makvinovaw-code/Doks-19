@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛧ DARK_MARKET_666 ⛧</title>
+    <style>
+        :root { --red: #ff0000; --bg: #050000; --panel: #0a0a0a; --gray: #555; --green: #00ff00; --yellow: #ffff00; }
+        
+        body {
+            background-color: var(--bg); color: var(--red);
+            font-family: 'Courier New', monospace; margin: 0; padding: 0; font-size: 11px;
+        }
+
+        /* CRT Scanline Effect */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 1000;
+        }
+
+        /* HEADER & STATS */
+        .top-bar {
+            background: #000; border-bottom: 2px solid var(--red);
+            padding: 10px; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .user-info { display: flex; gap: 10px; }
+        .balance { color: var(--green); font-weight: bold; border: 1px solid #1a1a1a; padding: 2px 5px; }
+
+        .container { padding: 15px; }
+        
+        /* КАТЕГОРИИ */
+        .category-title {
+            background: var(--red); color: black; padding: 3px 10px;
+            font-weight: bold; margin: 15px 0 10px 0; text-transform: uppercase;
+        }
+
+        /* КАРТОЧКИ ТОВАРОВ */
+        .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .product-card {
+            background: var(--panel); border: 1px solid #222; padding: 10px;
+            display: flex; flex-direction: column; transition: 0.2s;
+        }
+        .product-card:hover { border-color: var(--red); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+        .product-name { font-weight: bold; color: #fff; margin-bottom: 5px; font-size: 12px; }
+        .product-desc { color: var(--gray); font-size: 9px; height: 25px; overflow: hidden; }
+        .product-price { color: var(--red); font-weight: bold; margin: 10px 0; font-size: 13px; }
+        .buy-btn {
+            background: var(--red); color: black; border: none; padding: 5px;
+            font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: inherit;
+        }
+        .buy-btn:active { background: white; }
+
+        /* ОКНО ОТЧЕТА (КВИТАНЦИЯ) */
+        #receipt-box {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 400px; background: #000; border: 2px solid var(--red);
+            padding: 20px; z-index: 2000; display: none; box-shadow: 0 0 50px #000;
+        }
+        .receipt-row { border-bottom: 1px solid #222; padding: 5px 0; display: flex; justify-content: space-between; }
+        .receipt-val { color: #fff; font-weight: bold; }
+        .threat-tag { text-align: center; margin-top: 10px; padding: 5px; font-weight: bold; border: 1px solid; }
+
+        /* ОТЗЫВЫ */
+        .feedback-section { margin-top: 20px; border-top: 1px solid var(--red); padding-top: 10px; }
+        .review-item { font-size: 10px; margin-bottom: 5px; border-left: 2px solid var(--red); padding-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="user-info">
+            <span>ID: <b>ADMIN_ROOT</b></span>
+            <span class="balance">BAL: ∞ RUB</span>
+        </div>
+        <button onclick="alert('ADMIN: Пополнение не требуется')" style="background:var(--green); border:none; font-size:9px; font-weight:bold; cursor:pointer;">+ ПОПОЛНИТЬ</button>
+    </div>
+
+    <div class="container">
+        <div class="category-title">Услуги пробива</div>
+        <div class="shop-grid">
+            <div class="product-card">
+                <div class="product-name">DOXING_FILE</div>
+                <div class="product-desc">Полное досье на цель (Семья, Адрес, Школа)</div>
+                <div class="product-price">200 ₽</div>
+                <button class="buy-btn" onclick="openShop('DOX')">КУПИТЬ</button>
+            </div>
+            <div class="product-card">
+                <div class="product-name">SWAT_CALL</div>
+                <div class="product-desc">Выезд группы захвата по адресу цели</div>
+                <div class="product-price">1500 ₽</div>
+                <button class="buy-btn" onclick="openShop('SWAT')">КУПИТЬ</button>
+            </div>
+        </div>
+
+        <div class="category-title">Атаки и Снос</div>
+        <div class="shop-grid">
+            <div class="product-card">
+                <div class="product-name">TROLL_SPAM</div>
+                <div class="product-desc">500+ сервисов для уничтожения телефона</div>
+                <div class="product-price">1100 ₽</div>
+                <button class="buy-btn" onclick="openShop('TROLL')">КУПИТЬ</button>
+            </div>
+            <div class="product-card">
+                <div class="product-name">ACCOUNT_BAN</div>
+                <div class="product-desc">Снос TG/VK аккаунтов (масс-репорты)</div>
+                <div class="product-price">500 ₽</div>
+                <button class="buy-btn" onclick="openShop('SNOS')">КУПИТЬ</button>
+            </div>
+        </div>
+
+        <div class="feedback-section">
+            <div style="color:white; margin-bottom:10px;">ПОСЛЕДНИЕ ПОКУПКИ:</div>
+            <div id="reviews"></div>
+        </div>
+    </div>
+
+    <div id="receipt-box">
+        <h2 style="text-align:center; margin:0 0 15px 0; font-size:14px;">КВИТАНЦИЯ #<span id="r-num"></span></h2>
+        <div id="receipt-content"></div>
+        <div id="threat-tag" class="threat-tag"></div>
+        <button onclick="document.getElementById('receipt-box').style.display='none'" style="width:100%; background:var(--red); border:none; padding:10px; margin-top:15px; cursor:pointer; font-weight:bold;">УДАЛИТЬ ЛОГ</button>
+    </div>
+
+    <script>
+        const m = { n: ["Артём", "Кирилл", "Денис", "Макс", "Игорь"], s: ["Волков", "Петров", "Белов", "Смирнов"], o: ["Игоревич", "Петрович", "Олегович"] };
+        const f = { n: ["Юлия", "Алина", "Кира", "Софья", "Ева"], s: ["Волкова", "Петрова", "Белова", "Смирнова"], o: ["Игоревна", "Петровна", "Олеговна"] };
+        
+        function rand(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+        function openShop(type) {
+            const target = prompt("ВВЕДИТЕ ДАННЫЕ ЦЕЛИ (НОМЕР/НИК):");
+            if (!target) return;
+
+            document.getElementById('receipt-box').style.display = 'block';
+            document.getElementById('r-num').innerText = Math.floor(Math.random()*99999);
+            const content = document.getElementById('receipt-content');
+            const threat = document.getElementById('threat-tag');
+            
+            content.innerHTML = "<div style='text-align:center;'>ОПЛАТА... ПРОВЕРКА ТРАНЗАКЦИИ...</div>";
+            threat.style.display = 'none';
+
+            setTimeout(() => {
+                const isFem = Math.random() > 0.5;
+                const db = isFem ? f : m;
+                const age = Math.floor(Math.random() * 20) + 14;
+                const sn = rand(db.s);
+                
+                let html = "";
+                html += rRow("ТОВАР:", type);
+                html += rRow("ЦЕЛЬ:", target);
+                html += rRow("ПОЛ:", isFem ? "ЖЕНСКИЙ" : "МУЖСКОЙ");
+                html += rRow("ФИО:", `${sn} ${rand(db.n)} ${rand(db.o)}`);
+                html += rRow("ВОЗРАСТ:", age + " ЛЕТ");
+                html += rRow("СТАТУС:", "ОПЛАЧЕНО");
+                
+                content.innerHTML = html;
+
+                threat.style.display = 'block';
+                if(age < 18) {
+                    threat.innerText = "УГРОЗА: НИЗКАЯ (MINOR)";
+                    threat.style.color = "var(--green)"; threat.style.borderColor = "var(--green)";
+                } else {
+                    threat.innerText = "УГРОЗА: КРИТИЧЕСКАЯ (ADULT)";
+                    threat.style.color = "var(--red)"; threat.style.borderColor = "var(--red)";
+                }
+            }, 1200);
+        }
+
+        function rRow(l, v) { return `<div class="receipt-row"><span>${l}</span><span class="receipt-val">${v}</span></div>`; }
+
+        // ОТЗЫВЫ МАГАЗИНА
+        const feedback = [
+            {u: "User_88", t: "Докс пришел быстро, инфа сошлась."},
+            {u: "Hacker_X", t: "Сват за 1500 это подарок. Работает."},
+            {u: "Lana_Dark", t: "Снесла акк бывшему за 5 минут!"},
+            {u: "Anon_66", t: "Тролль-бомбер просто разносит телефон."}
+        ];
+
+        setInterval(() => {
+            const list = document.getElementById('reviews');
+            const r = rand(feedback);
+            const d = document.createElement('div');
+            d.className = 'review-item';
+            d.innerHTML = `<span style="color:white;">${r.u}:</span> ${r.t}`;
+            list.insertBefore(d, list.firstChild);
+            if(list.children.length > 4) list.removeChild(list.lastChild);
+        }, 5000);
+    </script>
+</body>
+</html>
